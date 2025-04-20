@@ -2,14 +2,134 @@
 <html lang="kk">
 <head>
   <meta charset="UTF-8">
-  <title>Менің алғашқы сайтым</title>
+  <title>Танысу және Шабыт</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .box {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      max-width: 500px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #00aaff;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0077cc;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-  <h1>Сәлем, әлем!</h1>
-  <p>Бұл менің GitHub Pages арқылы жасалған алғашқы сайтым ✨</p>
-  <h1>Сәлем, әлем!</h1>
-<p>Бұл менің алғашқы GitHub сайтім 🎉</p>
-<img src="https://picsum.photos/400/200" alt="Random image" />
+
+  <div class="box">
+    <h2>Қош келдіңіз!</h2>
+    <p>Атыңызды енгізіңіз, біз танысайық және күнді керемет бастайық 😊</p>
+    <input type="text" id="nameInput" placeholder="Сіздің атыңыз">
+    <br>
+    <button onclick="start()">Бастау</button>
+
+    <div class="output" id="greeting"></div>
+  </div>
+
+  <div class="footer">&copy; 2025 Танысу беті | Шабытпен жасалған 💫</div>
+
+  <script>
+    function start() {
+      const name = document.getElementById("nameInput").value.trim();
+      const output = document.getElementById("greeting");
+
+      if (name === "") {
+        alert("Атыңызды енгізіңіз, өтінемін!");
+        return;
+      }
+
+      const now = new Date();
+      const hours = now.getHours();
+      let timeOfDay;
+
+      if (hours < 12) {
+        timeOfDay = "Қайырлы таң";
+      } else if (hours < 18) {
+        timeOfDay = "Қайырлы күн";
+      } else {
+        timeOfDay = "Қайырлы кеш";
+      }
+
+      const quotes = [
+        "Бүгінгі күн – жаңа мүмкіндік.",
+        "Арманда, сен және баста!",
+        "Өзгеріс өзіңнен басталады.",
+        "Бір қадам – мың жолдың басы.",
+        "Сен мықтысың!"
+      ];
+
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+      output.innerHTML = `
+        <p>${timeOfDay}, <strong>${name}</strong>!</p>
+        <p>📅 Бүгін: ${now.toLocaleDateString('kk-KZ')}</p>
+        <p>⏰ Уақыт: ${now.toLocaleTimeString('kk-KZ')}</p>
+        <p>💡 <em>${quote}</em></p>
+        <button onclick="sayGoodbye('${name}')">Қоштасу</button>
+      `;
+    }
+
+    function sayGoodbye(name) {
+      alert("Сау болыңыз, " + name + "! Керемет күн тілеймін 🌟");
+    }
+  </script>
 
 </body>
 </html>
