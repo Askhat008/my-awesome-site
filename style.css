@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+.section {
+  padding: 100px 20px;
+  text-align: center;
+  min-height: 100vh;
+  transition: all 0.6s ease;
+}
+
+#hero {
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+  color: #fff;
+}
+
+#about {
+  background-color: #f0f0f0;
+}
+
+#services {
+  background-color: #d3e0ff;
+}
+
+#contact {
+  background-color: #fff;
+}
