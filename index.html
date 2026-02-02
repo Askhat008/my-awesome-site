@@ -1,135 +1,68 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Askhat prince</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: white;
-      text-align: center;
-    }
-
-    .box {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-      max-width: 500px;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    input {
-      padding: 10px;
-      width: 80%;
-      border-radius: 10px;
-      border: none;
-      margin-top: 10px;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 10px;
-      background-color: #00aaff;
-      color: white;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #0077cc;
-    }
-
-    .output {
-      margin-top: 20px;
-      font-size: 1.2em;
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 15px;
-      font-size: 0.9em;
-      color: #ccc;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pixel Runner Sprite Sheet</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Pixel art 2D character</p>
+        <h1>8-Direction Sprite Sheet</h1>
+        <p class="subtitle">
+          A 32x32 character with idle, run, and jump poses in every direction.
+          The sheet below is generated with canvas to keep every pixel crisp.
+        </p>
+      </div>
+      <div class="legend">
+        <h2>Legend</h2>
+        <ul>
+          <li><span class="chip">Row 1</span> Idle</li>
+          <li><span class="chip">Row 2</span> Run</li>
+          <li><span class="chip">Row 3</span> Jump</li>
+          <li><span class="chip">Cols</span> N, NE, E, SE, S, SW, W, NW</li>
+        </ul>
+      </div>
+    </header>
 
-  <div class="box">
-    <h2>Қош келдіңіз!</h2>
-    <p>Атыңызды енгізіңіз, біз танысайық және күнді керемет бастайық 😊</p>
-    <input type="text" id="nameInput" placeholder="Сіздің атыңыз">
-    <br>
-    <button onclick="start()">Бастау</button>
+    <section class="sheet-section">
+      <canvas id="spriteSheet" width="256" height="96" aria-label="Pixel sprite sheet"></canvas>
+      <div class="sheet-meta">
+        <div>
+          <h2>Sprite Sheet Details</h2>
+          <p>
+            Each tile is 32x32 pixels. The canvas is rendered at 1:1 resolution
+            and scaled with CSS so the pixels stay sharp.
+          </p>
+        </div>
+        <div class="palette">
+          <h3>Palette</h3>
+          <div class="swatches">
+            <span style="--swatch:#1c1c2e"></span>
+            <span style="--swatch:#2c3968"></span>
+            <span style="--swatch:#4f79d3"></span>
+            <span style="--swatch:#f2b880"></span>
+            <span style="--swatch:#f5f5f5"></span>
+            <span style="--swatch:#f04f4f"></span>
+            <span style="--swatch:#5dd39e"></span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="output" id="greeting"></div>
-  </div>
+    <section class="callout">
+      <h2>Use it in your game</h2>
+      <p>
+        Drop the sprite sheet into your engine, slice 32x32 frames, and map
+        them to the correct direction + action state. The file is deterministic
+        so you can regenerate it at any time.
+      </p>
+    </section>
+  </main>
 
-  <div class="footer">&copy; 2025 Танысу беті | Шабытпен жасалған 💫</div>
-
-  <script>
-    function start() {
-      const name = document.getElementById("nameInput").value.trim();
-      const output = document.getElementById("greeting");
-
-      if (name === "") {
-        alert("Атыңызды енгізіңіз, өтінемін!");
-        return;
-      }
-
-      const now = new Date();
-      const hours = now.getHours();
-      let timeOfDay;
-
-      if (hours < 12) {
-        timeOfDay = "Қайырлы таң";
-      } else if (hours < 18) {
-        timeOfDay = "Қайырлы күн";
-      } else {
-        timeOfDay = "Қайырлы кеш";
-      }
-
-      const quotes = [
-        "Бүгінгі күн – жаңа мүмкіндік.",
-        "Арманда, сен және баста!",
-        "Өзгеріс өзіңнен басталады.",
-        "Бір қадам – мың жолдың басы.",
-        "Сен мықтысың!"
-      ];
-
-      const quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-      output.innerHTML = `
-        <p>${timeOfDay}, <strong>${name}</strong>!</p>
-        <p>📅 Бүгін: ${now.toLocaleDateString('kk-KZ')}</p>
-        <p>⏰ Уақыт: ${now.toLocaleTimeString('kk-KZ')}</p>
-        <p>💡 <em>${quote}</em></p>
-        <button onclick="sayGoodbye('${name}')">Қоштасу</button>
-      `;
-    }
-
-    function sayGoodbye(name) {
-      alert("Сау болыңыз, " + name + "! Керемет күн тілеймін 🌟");
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
